@@ -12,5 +12,12 @@ pipeline{
                 echo "------------ build completed ---------"
         }
       }
+        stage('Sonar analysis')
+         environment {
+            scannerHome= tool 'balakrishnan21_sonarscanner'
+         }
+        steps {
+            withSonarQubeEnv('balakrishnan21_sonarqube_server')
+            sh "${scannerHome} /bin/sonar-scanner"
     } 
  }
