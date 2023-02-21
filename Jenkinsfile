@@ -24,3 +24,4 @@ pipeline{
     } 
         echo '<--------------- Sonar Analysis stopped  --------------->' 
  }
+}
