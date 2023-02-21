@@ -3,7 +3,8 @@ pipeline{
         node {
             label "jenkins_slave"
         }
-    }
+        }
+       
     stages {
         stage('build') {
             steps{
@@ -11,18 +12,17 @@ pipeline{
                 sh 'mvn clean install -Dmaven.test.skip=true'
                 echo "------------ build completed ---------"
         }
-      }
-        stage('sonar analysis')
+      }    
+       stage ("Sonar Analysis") {
             environment {
-                scannerHome= tool 'balakrishnan21_sonarscanner'
-         }
+               scannerHome = tool 'balakrishnan21_sonarscanner'
+            }
             steps {
                 echo '<--------------- Sonar Analysis started  --------------->'
-                withSonarQubeEnv('balakrishnan21_sonarqube_server') {
-                   sh "${scannerHome} /bin/sonar-scanner"
-            }
-    } 
-                 echo '<--------------- Sonar Analysis stopped  --------------->' 
- }
-    
+                withSonarQubeEnv('balakrishnan21_sonarqube_server') {    
+                    sh "${scannerHome}/bin/sonar-scanner"
+                }    
+              echo '<--------------- Sonar Analysis stopped  --------------->' 
+            }   
+        }
 }
