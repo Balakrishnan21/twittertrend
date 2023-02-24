@@ -30,13 +30,13 @@ pipeline{
         steps {
             script {
                     echo '<--------------- Jar Publish Started --------------->'
-                     def server = Artifactory.newServer url:registry+"/artifactory" ,  credentialsId:"jfrog_access"
+                     def server = Artifactory.newServer url:registry+"/artifactory" ,  credentialsId:"jfrog-access"
                      def properties = "buildid=${env.BUILD_ID},commitid=${GIT_COMMIT}";
                      def uploadSpec = """{
                           "files": [
                             {
                               "pattern": "jarstaging/(*)",
-                              "target": "twittertrend-libs-release-local/{1}",
+                              "target": "ttrend-libs-release-local/{1}",
                               "flat": "false",
                               "props" : "${properties}",
                               "exclusions": [ "*.sha1", "*.md5"]
